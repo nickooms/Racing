@@ -1,0 +1,20 @@
+{
+	"name": "Racing Development",
+	"manifest_version": 2,
+	"description": "Nick Ooms Racing Development",
+	"version": "1.0",
+	"icons": {
+		"128": "chrome-icon.png",
+		"16": "chrome-icon16.png"
+	},
+	"permissions": [
+		"storage"
+	],
+	"app": {
+		"background": {
+			"scripts": [
+				"background.js"
+			]
+		}
+	}
+}
