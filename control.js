@@ -378,7 +378,8 @@ function onKeyDown(event){
 			div.style.display = div.style.display == '' ? 'none' : '';
 			break;
 		case 'C'.charCodeAt(0):
-			prompt('', 'views.push({ x: ' + camera.position.x + ', y: ' + camera.position.y + ', z: ' + camera.position.z + ', ry: ' + (camera.rotation.y / (Math.PI / 180)) + ' });');
+			//prompt('', 'views.push({ x: ' + camera.position.x + ', y: ' + camera.position.y + ', z: ' + camera.position.z + ', ry: ' + (camera.rotation.y / (Math.PI / 180)) + ' });');
+			console.log('views.push({ x: ' + camera.position.x + ', y: ' + camera.position.y + ', z: ' + camera.position.z + ', ry: ' + (camera.rotation.y / (Math.PI / 180)) + ' });');
 			break;
 		case 'V'.charCodeAt(0):
 			nextView();
