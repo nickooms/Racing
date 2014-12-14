@@ -56,6 +56,7 @@ function init() {
 	//addBaan();
 	addComplexBanen();
 	addComplexParkings();
+	addComplexHuizen();
 	//addVoetpad();
 	//addParking();
 	//addDal();

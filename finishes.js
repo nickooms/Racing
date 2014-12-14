@@ -221,6 +221,41 @@ function addComplexParking(complexParkings) {
 	complexParkingsMesh = new THREE.Mesh(complexParkingsGeometry, complexParkingsMaterial);
 	scene.add(complexParkingsMesh);
 }
+/*function addComplexHuizen() {
+	
+}*/
+var complexHuizen, complexHuizenVertices, complexHuis, complexHuizenHoles, complexHuizenTriangles, complexHuizenGeometry, complexHuizenMaterial, complexHuizenMesh;
+function addComplexHuis(complexHuizen) {
+	complexHuizenVertices = [];
+	for (var i = 0; i < complexHuizen.length; i++) {
+		complexHuis = complexHuizen[i];
+		complexHuizenVertices.push(new THREE.Vector2(complexHuis[0]/*, 0*/, -complexHuis[1]));
+	}
+	complexHuizenHoles = [];
+	complexHuizenTriangles = THREE.Shape.Utils.triangulateShape(complexHuizenVertices, complexHuizenHoles);
+	complexHuizenVertices = [];
+	for (var i = 0; i < complexHuizen.length; i++) {
+		complexHuis = complexHuizen[i];
+		complexHuizenVertices.push(new THREE.Vector3(complexHuis[0], 0.1, -complexHuis[1]));
+	}
+	complexHuizenGeometry = new THREE.Geometry();
+	complexHuizenMaterial = new THREE.MeshBasicMaterial({
+		color: 0xFF0000,
+		opacity: 1,
+		side: THREE.DoubleSide,
+		transparent: false
+	});
+	complexHuizenGeometry.vertices = complexHuizenVertices;
+	complexHuizenGeometry.verticesNeedUpdate = true;
+	complexHuizenGeometry.computeFaceNormals();
+	for( var i = 0; i < complexHuizenTriangles.length; i++ ){
+		//console.log(complexParkingsTriangles[i]);
+	    complexHuizenGeometry.faces.push(new THREE.Face3(complexHuizenTriangles[i][0], complexHuizenTriangles[i][1], complexHuizenTriangles[i][2]));
+	}
+	complexHuizenGeometry.computeBoundingSphere();
+	complexHuizenMesh = new THREE.Mesh(complexHuizenGeometry, complexHuizenMaterial);
+	scene.add(complexHuizenMesh);
+}
 function addComplexBanen() {
 	//Hoevenen
 	//Markt
@@ -231,6 +266,10 @@ function addComplexBanen() {
 	addComplexBaan([[152553.16,221853.84],[152575.92,221868.19],[152584.72,221854.96],[152579.49,221851.06],[152584.39,221842.13],[152575.85,221837.04],[152571.95,221843.45],[152563.81,221839.02]]);
 	addComplexBaan([[152492.01,221794.21],[152486.52,221805.12],[152498.23,221811.21],[152492.74,221821.99],[152501.21,221832.77],[152507.29,221830.13],[152510.99,221829.33],[152513.71,221829.13],[152517.08,221829.13],[152520.39,221829.47],[152522.70,221829.99],[152525.08,221832.04],[152525.15,221832.51],[152520.45,221840.97],[152527.47,221845.08],[152531.24,221839.06],[152537.92,221843.42],[152548.10,221828.34],[152543.21,221824.90],[152544.60,221822.39],[152542.02,221821.13]]);
 	addComplexBaan([[152628.70,221887.65],[152622.94,221896.52],[152658.66,221916.29],[152665.14,221903.59],[152640.67,221889.64],[152638.42,221893.21]]);
+	//Lombaardstraat
+	addComplexBaan([[152702.05,221522.32],[152700.39,221528.60],[152692.78,221525.10],[152679.42,221566.77],[152689.94,221566.90],[152700.59,221533.96],[152706.41,221530.98]]);
+	addComplexBaan([[152614.73,221770.86],[152620.29,221779.85],[152621.68,221780.45],[152624.33,221775.29],[152637.75,221733.09],[152627.17,221732.16]]);
+	addComplexBaan([[152601.69,221792.96],[152575.83,221837.01],[152584.36,221842.10],[152612.41,221793.35]]);
 	//Frans Oomsplein
 	addComplexBaan([[152490.93,221856.42],[152486.89,221864.23],[152509.52,221875.21],[152527.51,221845.18],[152520.50,221841.01],[152506.74,221862.97],[152506.14,221862.97],[152504.82,221862.97],[152502.31,221861.78]]);
 	addComplexBaan([[152476.47,221840.51],[152487.91,221847.13],[152501.21,221832.77],[152492.74,221821.99],[152490.29,221820.93]]);
@@ -434,6 +473,12 @@ function addComplexBaan(complexBanen) {
 function addComplexHuizen() {
 	//Markt
 	addComplexHuis([[152607.45,221859.26],[152602.68,221866.74],[152611.15,221872.49],[152618.76,221860.98],[152621.27,221856.81],[152612.74,221851.46],[152610.82,221854.37],[152615.78,221857.41],[152612.61,221862.44]]);
+	addComplexHuis([[152620.88,221878.97],[152628.61,221884.13],[152635.76,221873.15],[152631.86,221870.44],[152632.98,221868.65],[152630.66,221867.13],[152626.89,221872.42],[152625.77,221871.76]]);
+	addComplexHuis([[152611.15,221872.49],[152615.52,221875.33],[152624.51,221861.77],[152626.63,221858.20],[152626.03,221857.74],[152623.65,221861.11],[152621.93,221860.12],[152620.48,221861.91],[152618.76,221860.98]]);
+	addComplexHuis([[152598.65,221882.15],[152586.68,221901.99],[152592.76,221905.76],[152598.19,221897.89],[152597.86,221896.43],[152598.85,221894.78],[152600.24,221894.32],[152605.60,221886.38]]);
+	addComplexHuis([[152602.02,221856.95],[152600.30,221859.26],[152597.72,221863.43],[152602.68,221866.74],[152607.45,221859.26],[152604.93,221857.54],[152604.07,221858.33]]);
+	addComplexHuis([[152591.51,221877.78],[152580.00,221897.10],[152583.17,221899.01],[152576.69,221909.66],[152580.00,221911.85],[152581.06,221911.12],[152582.84,221908.27],[152586.68,221901.99],[152598.65,221882.15]]);
+	addComplexHuis([[152637.08,221873.68],[152628.68,221887.57],[152633.58,221890.42],[152640.59,221878.11],[152641.51,221876.06]]);
 }
 function addBaan() {
 	storage.getJSON('straten', function(straten) {
