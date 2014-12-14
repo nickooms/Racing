@@ -34,11 +34,11 @@ function init() {
 	addTextures();
 	addMaterials();
 	addHouses([
-		'Markt',
+		/*'Markt',
 		'Frans Oomsplein',
 		'Witvenstraat',  
 		'Hooghuisstraat',
-		'Kerk',
+		'Kerk',*/
 		//'Platanenlaan',
 		//'Kastanjelaan',
 		//'Berkenlaan',
@@ -56,7 +56,7 @@ function init() {
 	//addBaan();
 	addComplexBanen();
 	addComplexParkings();
-	addVoetpad();
+	//addVoetpad();
 	//addParking();
 	//addDal();
 	//addTiles(tileGroups[0]);

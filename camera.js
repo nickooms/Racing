@@ -2,10 +2,12 @@ var camera;
 var fov = 45;
 var views = [];
 views.push({ x: 152564.01, y: 4.707642565081503, z: -221840.83, ry: 139.99999999999994, name: 'Markt 19' });
+views.push({ x: 154249.01, y: 436.24606709702897, z: -222755.83, ry: 0.005729577816116215, top: true, name: 'Kapellen' });
 views.push({ x: 152559.01, y: 9.173863567262195, z: -221860.83, ry: 15.000000000000027, name: 't uveltje' });
 views.push({ x: 152399.01, y: 13.493289711401214, z: -222385.83, ry: 70.0057295778161, name: 'Fred' });
 views.push({ x: 152569.01, y: 2.657341500000001, z: -221940.83, ry: 109.99999999999997, name: 'Traiteur' });
-views.push({ x: 152220.73, y: 182.45201830476057, z: -212308.24, ry: 0.005729577816116215, name: 'Grote Markt' });
+views.push({ x: 152220.73, y: 182.45201830476057, z: -212308.24, ry: 0.005729577816116215, top: true, name: 'Grote Markt' });
+views.push({ x: 154214.01, y: 201.70835284322297, z: -222940.83, ry: 0.005729577816116215, top: true, name: 'Engelselei' });
 views.push({ x: 152554.01, y: 10.091249923988416, z: -221840.83, ry: 164.99999999999991, name: 'Markt 19' });
 views.push({ x: 152549.01, y: 14.774599013711443, z: -221825.83, ry: 179.9999999999999, name: 'Markt 19 Lucht' });
 views.push({ x: 152569.01, y: 1.5, z: -221855.83, ry: 45, name: 'Markt 19' });
@@ -148,6 +150,9 @@ function setCamera(view) {
 	});
 	camera.projectionMatrix.makePerspective(fov, window.innerWidth / window.innerHeight, 1, 10000);
 	camera.rotation.y = rot(view.ry);
+	if (view.top) {
+		topView();
+	}
 }
 function initCamera() {
 	fov = fov * 1.40;
