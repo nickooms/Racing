@@ -61,7 +61,7 @@ function addComplexBaan(complexBanen) {
 	complexBanenVertices = [];
 	for (var i = 0; i < complexBanen.length; i++) {
 		complexBaan = complexBanen[i];
-		complexBanenVertices.push(new THREE.Vector3(complexBaan[0], 0, -complexBaan[1]));
+		complexBanenVertices.push(new THREE.Vector3(complexBaan[0], 0.1, -complexBaan[1]));
 	}
 	complexBanenGeometry = new THREE.Geometry();
 	complexBanenMaterial = new THREE.MeshBasicMaterial({
@@ -92,7 +92,7 @@ function addComplexVoetpad(complexVoetpaden) {
 	complexVoetpadenVertices = [];
 	for (var i = 0; i < complexVoetpaden.length; i++) {
 		complexVoetpad = complexVoetpaden[i];
-		complexVoetpadenVertices.push(new THREE.Vector3(complexVoetpad[0], 0.1, -complexVoetpad[1]));
+		complexVoetpadenVertices.push(new THREE.Vector3(complexVoetpad[0], 0, -complexVoetpad[1]));
 	}
 	complexVoetpadenGeometry = new THREE.Geometry();
 	complexVoetpadenMaterial = new THREE.MeshBasicMaterial({
