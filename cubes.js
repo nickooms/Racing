@@ -35,11 +35,11 @@ function init() {
 	addTextures();
 	addMaterials();
 	addHouses([
-		/*'Markt',
+		'Markt',
 		'Frans Oomsplein',
 		'Witvenstraat',  
 		'Hooghuisstraat',
-		'Kerk',*/
+		'Kerk',
 		//'Platanenlaan',
 		//'Kastanjelaan',
 		//'Berkenlaan',
@@ -48,22 +48,9 @@ function init() {
 		//'Molenstraat',
 		//'Dennenlaan
 	]);
-		var onError = function ( xhr ) {
+	var onError = function (xhr) {
 	};
-	/*var manager = new THREE.LoadingManager();
-	manager.onProgress = function ( item, loaded, total ) {
-		console.log( item, loaded, total );
-	};*/
-	//var loader = new THREE.OBJLoader( /*manager*/ );
-	/*loader.load( 'obj/is7bhmvuz9-ak47FPS/Adding/AK.obj', function ( object ) {
-		object.traverse( function ( child ) {
-			if ( child instanceof THREE.Mesh ) {
-				//child.material.map = texture;
-			}
-		} );
-		object.position.y = - 80;
-		scene.add( object );*/
-	//}, onError/*onProgress*/, onError );
+
 	//addBochten();
 	//addStippel();
 	//addFinishes();
@@ -71,39 +58,19 @@ function init() {
 	//addKinderkop();
 	//addZebra();
 	//addBaan();
-
-	/*var m = new MM3DModel();
-	m.OnLoad = function()
-	{
-		var g = this.GetGeometry();
-		var a = this.textures[0];
-		//a = a.substr(a.lastIndexOf("\\") + 1);
-		var t = THREE.ImageUtils.loadTexture('obj/AK.png');
-		t.needsUpdate = true;
-		var mat = new THREE.MeshBasicMaterial({map: t});
-		var mes = new THREE.Mesh(g, mat);
-		scene.add(mes);*/
-		/*for(var i = 0; i < skinMesh.skeleton.bones.length; i++)
-		{
-			if(document.getElementById("boneSelector").value == skinMesh.skeleton.bones[i].name) skinBoxes[i].add(mes);
-		}*/
-	//}
-	//m.Load('obj/ak47.mm3d');
-	var ak = document.createElement('img');
-	
-	ak.style.position = 'absolute';
-	ak.style.left = '100px';
-	ak.style.zIndex = 5000;
-	ak.onload = function() {
-		ak.style.top = '500px';
-	};
-	ak.src = 'obj/AK-47_Gold_CoD4.png';
-	document.body.appendChild(ak);
-	
-	addComplexParkings();
-	addComplexVoetpaden();
+	//addComplexParkings();
+	//addComplexVoetpaden();
 	addComplexBanen();
-	addComplexHuizen();
+	AK47.init(function() {
+		AK47.show();
+		//ak47.hide();
+		/*ak74u
+		g36c
+		hamr
+		mc29*/
+
+	});
+	//addComplexHuizen();
 	//addVoetpad();
 	//addParking();
 	//addDal();

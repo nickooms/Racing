@@ -20,7 +20,8 @@ var sMenu = '<select id="ddSplit" style="display:none;"><option>1x1</option><opt
 	'<button id="btnStippel">Stippel</button><br/>' +
 	'<button id="btnZebra">Zebra</button><br/>' +
 	'<button id="btnCorners">Bochtjes</button><br/>' +
-	'<button id="btnDals">Dals</button>';
+	'<button id="btnDals">Dals</button><br/>' +
+	'<button id="btnAK-47">AK-47</button>';
 function toggleMoving() {
 	moving = !moving;
 	$('#btnStartStop').text(moving ? 'Stop' : 'Start');
@@ -83,6 +84,9 @@ function addControls() {
 	});
 	$('#btnParking').click(function() {
 		Parking.toggle();
+	});
+	$('#btnAK-47').click(function() {
+		AK47.toggle();
 	});
 	window.addEventListener('resize', onWindowResize, false);
 	document.addEventListener('mousedown', onMouseDown, false);
