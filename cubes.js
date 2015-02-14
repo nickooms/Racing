@@ -35,11 +35,11 @@ function init() {
 	addTextures();
 	addMaterials();
 	addHouses([
-		'Markt',
+		/*'Markt',
 		'Frans Oomsplein',
 		'Witvenstraat',  
 		'Hooghuisstraat',
-		'Kerk',
+		'Kerk',*/
 		//'Platanenlaan',
 		//'Kastanjelaan',
 		//'Berkenlaan',
@@ -48,7 +48,8 @@ function init() {
 		//'Molenstraat',
 		//'Dennenlaan
 	]);
-	var onError = function (xhr) {
+
+	var onError = function(xhr) {
 	};
 
 	//addBochten();
@@ -59,17 +60,17 @@ function init() {
 	//addZebra();
 	//addBaan();
 	//addComplexParkings();
-	//addComplexVoetpaden();
+	addComplexVoetpaden();
 	addComplexBanen();
-	AK47.init(function() {
-		AK47.show();
+	//AK47.init(function() {
+		//AK47.show();
 		//ak47.hide();
 		/*ak74u
 		g36c
 		hamr
 		mc29*/
 
-	});
+	//});
 	//addComplexHuizen();
 	//addVoetpad();
 	//addParking();

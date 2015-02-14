@@ -5,7 +5,7 @@ window.AK47 = {
 		img.style.position = 'absolute';
 		img.style.left = '100px';
 		img.style.zIndex = 5000;
-		img.style.display = 'none';
+		//img.style.display = 'none';
 		img.onload = function() {
 			AK47.img.style.top = '500px';
 			callback();
