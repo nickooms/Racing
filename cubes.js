@@ -62,16 +62,16 @@ function init() {
 	//addComplexParkings();
 	addComplexVoetpaden();
 	addComplexBanen();
-	//AK47.init(function() {
-		//AK47.show();
+	AK47.init(function() {
+		AK47.show();
 		//ak47.hide();
 		/*ak74u
 		g36c
 		hamr
 		mc29*/
 
-	//});
-	//addComplexHuizen();
+	});
+	addComplexHuizen();
 	//addVoetpad();
 	//addParking();
 	//addDal();

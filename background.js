@@ -8,7 +8,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
 		//minWidth:500,
 		//minHeight: 900
 	}, function(w) {
-		//w.maximize();
+		w.maximize();
 	});
 });
 /*chrome.commands.onCommand.addListener(function(command) {

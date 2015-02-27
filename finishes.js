@@ -49,6 +49,7 @@ Parking = {
 	items: [],
 	toggle: toggle	
 }
+
 var complexBanen, complexBanenVertices, complexBaan, complexBanenHoles, complexBanenTriangles, complexBanenGeometry, complexBanenMaterial, complexBanenMesh;
 function addComplexBaan(complexBanen) {
 	complexBanenVertices = [];
@@ -61,7 +62,7 @@ function addComplexBaan(complexBanen) {
 	complexBanenVertices = [];
 	for (var i = 0; i < complexBanen.length; i++) {
 		complexBaan = complexBanen[i];
-		complexBanenVertices.push(new THREE.Vector3(complexBaan[0], 0.1, -complexBaan[1]));
+		complexBanenVertices.push(new THREE.Vector3(complexBaan[0], 0, -complexBaan[1]));
 	}
 	complexBanenGeometry = new THREE.Geometry();
 	complexBanenMaterial = new THREE.MeshBasicMaterial({
@@ -123,7 +124,7 @@ function addComplexHuis(complexHuizen) {
 	complexHuizenVertices = [];
 	for (var i = 0; i < complexHuizen.length; i++) {
 		complexHuis = complexHuizen[i];
-		complexHuizenVertices.push(new THREE.Vector3(complexHuis[0], 0.1, -complexHuis[1]));
+		complexHuizenVertices.push(new THREE.Vector3(complexHuis[0], 0, -complexHuis[1]));
 	}
 	complexHuizenGeometry = new THREE.Geometry();
 	complexHuizenMaterial = new THREE.MeshBasicMaterial({
