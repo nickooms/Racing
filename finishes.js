@@ -50,6 +50,8 @@ Parking = {
 	toggle: toggle	
 }
 
+
+
 var complexBanen, complexBanenVertices, complexBaan, complexBanenHoles, complexBanenTriangles, complexBanenGeometry, complexBanenMaterial, complexBanenMesh;
 function addComplexBaan(complexBanen) {
 	complexBanenVertices = [];
@@ -81,6 +83,10 @@ function addComplexBaan(complexBanen) {
 	complexBanenMesh = new THREE.Mesh(complexBanenGeometry, complexBanenMaterial);
 	scene.add(complexBanenMesh);
 }
+
+
+
+
 var complexVoetpaden, complexVoetpadenVertices, complexVoetpad, complexVoetpadenHoles, complexVoetpadenTriangles, complexVoetpadenGeometry, complexVoetpadenMaterial, complexVoetpadenMesh;
 function addComplexVoetpad(complexVoetpaden) {
 	complexVoetpadenVertices = [];
@@ -105,44 +111,111 @@ function addComplexVoetpad(complexVoetpaden) {
 	complexVoetpadenGeometry.vertices = complexVoetpadenVertices;
 	complexVoetpadenGeometry.verticesNeedUpdate = true;
 	complexVoetpadenGeometry.computeFaceNormals();
-	for( var i = 0; i < complexVoetpadenTriangles.length; i++ ){
+	for( var i = 0; i < complexVoetpadenTriangles.length; i++ ) {
 	    complexVoetpadenGeometry.faces.push(new THREE.Face3(complexVoetpadenTriangles[i][0], complexVoetpadenTriangles[i][1], complexVoetpadenTriangles[i][2]));
 	}
 	complexVoetpadenGeometry.computeBoundingSphere();
 	complexVoetpadenMesh = new THREE.Mesh(complexVoetpadenGeometry, complexVoetpadenMaterial);
 	scene.add(complexVoetpadenMesh);
 }
-var complexHuizen, complexHuizenVertices, complexHuis, complexHuizenHoles, complexHuizenTriangles, complexHuizenGeometry, complexHuizenMaterial, complexHuizenMesh;
-function addComplexHuis(complexHuizen) {
-	complexHuizenVertices = [];
-	for (var i = 0; i < complexHuizen.length; i++) {
-		complexHuis = complexHuizen[i];
-		complexHuizenVertices.push(new THREE.Vector2(complexHuis[0]/*, 0*/, -complexHuis[1]));
+
+
+window.Points = {
+	toVertices: function(points, height) {
+		var is3d = height != null;
+		var vertices = [];
+		for (var point of points) {
+			vertices.push(is3d ? new THREE.Vector3(point[0], height, -point[1]) : new THREE.Vector2(point[0], -point[1]));
+		}
+		return vertices;
 	}
-	complexHuizenHoles = [];
-	complexHuizenTriangles = THREE.Shape.Utils.triangulateShape(complexHuizenVertices, complexHuizenHoles);
-	complexHuizenVertices = [];
-	for (var i = 0; i < complexHuizen.length; i++) {
-		complexHuis = complexHuizen[i];
-		complexHuizenVertices.push(new THREE.Vector3(complexHuis[0], 0, -complexHuis[1]));
+};
+
+window.Triangles = {
+	toFaces: function(triangles) {
+		var faces = []; 
+		for (var triangle of triangles) {
+			var floorFace = new THREE.Face3(triangle[0], triangle[1], triangle[2]);
+			faces.push(floorFace);
+		}
+		return faces;
 	}
-	complexHuizenGeometry = new THREE.Geometry();
-	complexHuizenMaterial = new THREE.MeshBasicMaterial({
-		color: 0xFF0000,
+};
+
+alert = function(text) {
+	console.log(text);
+};
+
+var huizenMaterial = {
+	floor: new THREE.MeshBasicMaterial({
+		color: 0xcccccc,
 		opacity: 1,
 		side: THREE.DoubleSide,
 		transparent: false
-	});
-	complexHuizenGeometry.vertices = complexHuizenVertices;
-	complexHuizenGeometry.verticesNeedUpdate = true;
-	complexHuizenGeometry.computeFaceNormals();
-	for( var i = 0; i < complexHuizenTriangles.length; i++ ){
-	    complexHuizenGeometry.faces.push(new THREE.Face3(complexHuizenTriangles[i][0], complexHuizenTriangles[i][1], complexHuizenTriangles[i][2]));
+	}),
+	wall: new THREE.MeshBasicMaterial({
+		color: 0xff0000,
+		opacity: 1,
+		side: THREE.DoubleSide,
+		transparent: false
+	}),
+	roof: new THREE.MeshBasicMaterial({
+		color: 0x333333,
+		opacity: 1,
+		side: THREE.DoubleSide,
+		transparent: false
+	})
+};
+//Hoogte : http://geo.agiv.be/ogc/wms/product/DHMV?request=getcapabilities&version=1.3.0&service=wms
+function addComplexHuis(corners) {
+	var triangles = THREE.Shape.Utils.triangulateShape(Points.toVertices(corners), []);
+	var floor = Points.toVertices(corners, 0);
+	var geometry = new THREE.Geometry();
+	geometry.vertices = floor;
+	geometry.verticesNeedUpdate = true;
+	geometry.computeFaceNormals();
+	geometry.faces = Triangles.toFaces(triangles);
+	geometry.computeBoundingSphere();
+	scene.add(new THREE.Mesh(geometry, huizenMaterial.floor));
+	var wall = [];
+	for (var i = 0; i < corners.length; i++) {
+		var corner = corners[i];
+		wall.push(new THREE.Vector3(corner[0], 0, -corner[1]));
+		wall.push(new THREE.Vector3(corner[0], 2.5, -corner[1]));
 	}
-	complexHuizenGeometry.computeBoundingSphere();
-	complexHuizenMesh = new THREE.Mesh(complexHuizenGeometry, complexHuizenMaterial);
-	scene.add(complexHuizenMesh);
+	var faces = [];
+	for (var i = 0; i < corners.length; i++) {
+		var offset = i * 2;
+		if (i != corners.length - 1) {
+			faces.push(new THREE.Face3(offset, offset + 1, offset + 3));
+			faces.push(new THREE.Face3(offset + 3, offset, offset + 2));
+		} else {
+			faces.push(new THREE.Face3(offset, offset + 1, 1));
+			faces.push(new THREE.Face3(1, offset, 0));
+		}
+	}
+	geometry = new THREE.Geometry();
+	geometry.vertices = wall;
+	geometry.verticesNeedUpdate = true;
+	geometry.computeFaceNormals();
+	geometry.faces = faces;
+	geometry.computeBoundingSphere();
+	scene.add(new THREE.Mesh(geometry, huizenMaterial.wall));
+	var roof = Points.toVertices(corners, 2.5);
+	geometry = new THREE.Geometry();
+	geometry.vertices = roof;
+	geometry.verticesNeedUpdate = true;
+	geometry.computeFaceNormals();
+	geometry.faces = Triangles.toFaces(triangles);
+	geometry.computeBoundingSphere();
+	scene.add(new THREE.Mesh(geometry, huizenMaterial.roof));
 }
+
+
+
+
+
+
 var complexParkings, complexParkingsVertices, complexParking, complexParkingsHoles, complexParkingsTriangles, complexParkingsGeometry, complexParkingsMaterial, complexParkingsMesh;
 function addComplexParking(complexParkings) {
 	complexParkingsVertices = [];
@@ -167,13 +240,17 @@ function addComplexParking(complexParkings) {
 	complexParkingsGeometry.vertices = complexParkingsVertices;
 	complexParkingsGeometry.verticesNeedUpdate = true;
 	complexParkingsGeometry.computeFaceNormals();
-	for( var i = 0; i < complexParkingsTriangles.length; i++ ){
+	for( var i = 0; i < complexParkingsTriangles.length; i++ ) {
 	    complexParkingsGeometry.faces.push(new THREE.Face3(complexParkingsTriangles[i][0], complexParkingsTriangles[i][1], complexParkingsTriangles[i][2]));
 	}
 	complexParkingsGeometry.computeBoundingSphere();
 	complexParkingsMesh = new THREE.Mesh(complexParkingsGeometry, complexParkingsMaterial);
 	scene.add(complexParkingsMesh);
 }
+
+
+
+
 function addBus() {
 	addFinish([[152533.23, 221837.77], [152558.02, 221854.03], [152555.22, 221854.70], [152533.76, 221840.30]], 'Bus');
 	//addFinish([[152532.56, 221837.39],[152558.15, 221854.05],[152556.82, 221855.78],[152531.23, 221838.99]], 'Bus');

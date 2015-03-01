@@ -1,27 +1,39 @@
+if (!Array.prototype.find) {
+  Array.prototype.find = function(predicate) {
+    if (this == null) {
+      throw new TypeError('Array.prototype.find called on null or undefined');
+    }
+    if (typeof predicate !== 'function') {
+      throw new TypeError('predicate must be a function');
+    }
+    var list = Object(this);
+    var length = list.length >>> 0;
+    var thisArg = arguments[1];
+    var value;
+    for (var i = 0; i < length; i++) {
+      value = list[i];
+      if (predicate.call(thisArg, value, i, list)) {
+        return value;
+      }
+    }
+    return undefined;
+  };
+}
 chrome.app.runtime.onLaunched.addListener(function() {
 	chrome.app.window.create('index.html', {
 		frame: 'chrome',
 		bounds: {
 			width: 800,
 			height: 500
-		},
-		//minWidth:500,
-		//minHeight: 900
+		}
 	}, function(w) {
-		w.maximize();
+		chrome.system.display.getInfo(function(displaysInfo) {
+			var getPrimary = displaysInfo.length === 1;
+			var bounds = displaysInfo.find(function(displayInfo) {
+				return displayInfo.isPrimary === getPrimary;
+			}).workArea;
+			w.setBounds(bounds);
+			w.maximize();
+		});
 	});
 });
-/*chrome.commands.onCommand.addListener(function(command) {
-	console.log("Command triggered: " + command);
-	if (command == "cmdNew") {
-		chrome.app.window.create('index.html', {
-			frame: 'chrome',
-			bounds: {
-				width: 500,
-				height: 900
-			},
-			minWidth:500,
-			minHeight: 900
-		});
-	}
-});*/
