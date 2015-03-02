@@ -178,13 +178,12 @@ function addComplexHuis(corners) {
 	geometry.computeBoundingSphere();
 	scene.add(new THREE.Mesh(geometry, huizenMaterial.floor));
 	var wall = [];
-	for (var i = 0; i < corners.length; i++) {
-		var corner = corners[i];
+	for (var corner of corners) {
 		wall.push(new THREE.Vector3(corner[0], 0, -corner[1]));
 		wall.push(new THREE.Vector3(corner[0], 2.5, -corner[1]));
 	}
 	var faces = [];
-	for (var i = 0; i < corners.length; i++) {
+	for (var i in corners) {
 		var offset = i * 2;
 		if (i != corners.length - 1) {
 			faces.push(new THREE.Face3(offset, offset + 1, offset + 3));
