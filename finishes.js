@@ -53,7 +53,14 @@ Parking = {
 
 
 var complexBanen, complexBanenVertices, complexBaan, complexBanenHoles, complexBanenTriangles, complexBanenGeometry, complexBanenMaterial, complexBanenMesh;
-function addComplexBaan(complexBanen) {
+function addComplexBaan() {
+	if (arguments.length == 3) {
+		var id = arguments[0];
+		var type = arguments[1];
+		var complexBanen = arguments[2]
+	} else {
+		var complexBanen = arguments[0];
+	}
 	complexBanenVertices = [];
 	for (var i = 0; i < complexBanen.length; i++) {
 		complexBaan = complexBanen[i];
@@ -69,6 +76,7 @@ function addComplexBaan(complexBanen) {
 	complexBanenGeometry = new THREE.Geometry();
 	complexBanenMaterial = new THREE.MeshBasicMaterial({
 		color: 0x000000,
+		//color: type == 'kruispuntzone' ? 0xb7b7b7 : 0xcccccc,
 		opacity: 1,
 		side: THREE.DoubleSide,
 		transparent: false

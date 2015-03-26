@@ -3,6 +3,7 @@ var fov = 45;
 var views = [];
 views.push({ x: 152567.01, y: 4.707642565081503, z: -221845.83, ry: 139.99999999999994, name: 'Markt 19' });
 views.push({ x: 154249.01, y: 436.24606709702897, z: -222755.83, ry: 0.005729577816116215, top: true, name: 'Kapellen' });
+views.push({ x: 192395.03, y: 50.00, z: -185784.00, ry: 0.005729577816116215, top: true, name: 'ScherpenHeuvel' });
 views.push({ x: 153755.30, y: 50, z: -216239.96, ry: 0.005729577816116215, top: true, name: 'Luchtbal' });
 views.push({ x: 152559.01, y: 9.173863567262195, z: -221860.83, ry: 15.000000000000027, name: 't uveltje' });
 views.push({ x: 152399.01, y: 13.493289711401214, z: -222385.83, ry: 70.0057295778161, name: 'Fred' });
