@@ -1,7 +1,7 @@
 var camera;
 var fov = 45;
 var views = [];
-views.push({ x: 152567.01, y: 4.707642565081503, z: -221845.83, ry: 139.99999999999994, name: 'Markt 19' });
+views.push({ x: 152567.01, y: 1.707642565081503, z: -221845.83, ry: 139.99999999999994, name: 'Markt 19' });
 views.push({ x: 154249.01, y: 436.24606709702897, z: -222755.83, ry: 0.005729577816116215, top: true, name: 'Kapellen' });
 views.push({ x: 192395.03, y: 50.00, z: -185784.00, ry: 0.005729577816116215, top: true, name: 'ScherpenHeuvel' });
 views.push({ x: 153755.30, y: 50, z: -216239.96, ry: 0.005729577816116215, top: true, name: 'Luchtbal' });

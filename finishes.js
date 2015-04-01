@@ -61,6 +61,23 @@ function addComplexBaan() {
 	} else {
 		var complexBanen = arguments[0];
 	}
+	var color = 0xff0000;
+	var height = 100;
+	switch (type) {
+		case 'kruispuntzone':
+			color = 0xb7b7b7;
+			height = 0;
+			break;
+		case 'wegsegment':
+			color = 0xcccccc;
+			height = 0;
+			break;
+		case 'kruispuntzoneBaan':
+		case 'wegsegmentBaan':
+			color = 0x666666;
+			height = 0.1;
+			break;
+	}
 	complexBanenVertices = [];
 	for (var i = 0; i < complexBanen.length; i++) {
 		complexBaan = complexBanen[i];
@@ -71,12 +88,12 @@ function addComplexBaan() {
 	complexBanenVertices = [];
 	for (var i = 0; i < complexBanen.length; i++) {
 		complexBaan = complexBanen[i];
-		complexBanenVertices.push(new THREE.Vector3(complexBaan[0], 0, -complexBaan[1]));
+		complexBanenVertices.push(new THREE.Vector3(complexBaan[0], height, -complexBaan[1]));
 	}
 	complexBanenGeometry = new THREE.Geometry();
 	complexBanenMaterial = new THREE.MeshBasicMaterial({
-		color: 0x000000,
-		//color: type == 'kruispuntzone' ? 0xb7b7b7 : 0xcccccc,
+		color: color,
+		//color: type == ,
 		opacity: 1,
 		side: THREE.DoubleSide,
 		transparent: false
@@ -172,10 +189,37 @@ var huizenMaterial = {
 		opacity: 1,
 		side: THREE.DoubleSide,
 		transparent: false
-	})
+	}),
+	randomWall: function() {
+		var r = parseInt(Math.random() * 256);
+		var g = parseInt(Math.random() * 256);
+		var b = parseInt(Math.random() * 256);
+		var color = r << 16 | g << 8 | b;
+		return new THREE.MeshBasicMaterial({
+			color: color,
+			opacity: 1,
+			side: THREE.DoubleSide,
+			transparent: false
+		});
+	},
+	randomRoof: function() {
+		var r = parseInt(Math.random() * 256);
+		var g = parseInt(Math.random() * 256);
+		var b = parseInt(Math.random() * 256);
+		var color = r << 16 | g << 8 | b;
+		return new THREE.MeshBasicMaterial({
+			color: color,
+			opacity: 1,
+			side: THREE.DoubleSide,
+			transparent: false
+			//vertexColors: THREE.vertexColors
+		});
+	}
 };
 //Hoogte : http://geo.agiv.be/ogc/wms/product/DHMV?request=getcapabilities&version=1.3.0&service=wms
 function addComplexHuis(corners) {
+	//var height = 2.5;
+	var height = 2.5 + Math.random() * 7;
 	var triangles = THREE.Shape.Utils.triangulateShape(Points.toVertices(corners), []);
 	var floor = Points.toVertices(corners, 0);
 	var geometry = new THREE.Geometry();
@@ -188,7 +232,7 @@ function addComplexHuis(corners) {
 	var wall = [];
 	for (var corner of corners) {
 		wall.push(new THREE.Vector3(corner[0], 0, -corner[1]));
-		wall.push(new THREE.Vector3(corner[0], 2.5, -corner[1]));
+		wall.push(new THREE.Vector3(corner[0], height, -corner[1]));
 	}
 	var faces = [];
 	for (var i in corners) {
@@ -207,15 +251,15 @@ function addComplexHuis(corners) {
 	geometry.computeFaceNormals();
 	geometry.faces = faces;
 	geometry.computeBoundingSphere();
-	scene.add(new THREE.Mesh(geometry, huizenMaterial.wall));
-	var roof = Points.toVertices(corners, 2.5);
+	scene.add(new THREE.Mesh(geometry, huizenMaterial.randomWall()));
+	var roof = Points.toVertices(corners, height);
 	geometry = new THREE.Geometry();
 	geometry.vertices = roof;
 	geometry.verticesNeedUpdate = true;
 	geometry.computeFaceNormals();
 	geometry.faces = Triangles.toFaces(triangles);
 	geometry.computeBoundingSphere();
-	scene.add(new THREE.Mesh(geometry, huizenMaterial.roof));
+	scene.add(new THREE.Mesh(geometry, huizenMaterial.randomRoof()));
 }
 
 

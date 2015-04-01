@@ -28,7 +28,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
 		}
 	}, function(w) {
 		chrome.system.display.getInfo(function(displaysInfo) {
-			var getPrimary = displaysInfo.length === 1;
+			var getPrimary = true;//displaysInfo.length === 1;
 			var bounds = displaysInfo.find(function(displayInfo) {
 				return displayInfo.isPrimary === getPrimary;
 			}).workArea;

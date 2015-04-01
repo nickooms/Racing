@@ -13,7 +13,7 @@ function addBocht(name, points) {
 	var middle = new THREE.Vector3(points[0][0], 0, -points[0][1]);
 	var spline = new THREE.Spline();
 	spline.initFromArray([[points[1][0], 0, -points[1][1]],[points[2][0], 0, -points[2][1]],[points[3][0], 0, -points[3][1]]]);
-	spline.reparametrizeByArcLength(10);
+//	spline.reparametrizeByArcLength(10);
 	bocht.vertices.push(middle);
 	for (var i = 0; i < spline.points.length; i++) {
 		bocht.vertices.push(new THREE.Vector3(spline.points[i].x, 0, spline.points[i].z));
