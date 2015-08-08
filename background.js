@@ -27,13 +27,13 @@ chrome.app.runtime.onLaunched.addListener(function() {
 			height: 500
 		}
 	}, function(w) {
-		chrome.system.display.getInfo(function(displaysInfo) {
+		/*chrome.system.display.getInfo(function(displaysInfo) {
 			var getPrimary = true;//displaysInfo.length === 1;
 			var bounds = displaysInfo.find(function(displayInfo) {
 				return displayInfo.isPrimary === getPrimary;
 			}).workArea;
 			w.setBounds(bounds);
 			w.maximize();
-		});
+		});*/
 	});
 });
